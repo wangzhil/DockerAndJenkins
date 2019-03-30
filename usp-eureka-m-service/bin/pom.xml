@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>usp-eureka-m-service</artifactId>
+	<name>usp-eureka-m-service</name>
+	<description>服务注册中心</description>
+	<parent>
+		<groupId>com.guobao</groupId>
+		<artifactId>usp</artifactId>
+		<version>1.0</version>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka-server</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+	</dependencies>
+	<profiles>
+  		<profile>
+			<id>pro</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env>pro</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>sit</id>
+			<properties>
+				<env>sit</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>dev</id>
+			<properties>
+				<env>dev</env>
+			</properties>
+		</profile>
+		<profile>
+			<id>uat</id>
+			<properties>
+				<env>uat</env>
+			</properties>
+		</profile>
+ 	</profiles>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+		<!-- 配置需要被替换的资源文件路径, jdbc.properties,common-context.properties -->
+        <resources>
+            <resource>
+                <!-- 
+                   	 资源文件位置src/main/resources/config/common,这下面的资源文件的${}会全部被替换成filter中的标签内容。
+                    directory指定的value会作为classes的资源跟目录，
+                  	  比如指定:src/main/resources/config/common，则classes下会出现jdbc等包，
+                  	  若指定:src/main/resources/jdbc/，则classes下直接出现jdbc包下的文件，不会额外出现jdbc等其他包结构。因为他把jdbc作为了根目录
+                -->
+                <directory>src/main/resources</directory>
+                <!-- 在某个resource中如果设置filtering为true，将会根据输入参数动态修改相关内容。 -->
+                <filtering>true</filtering>
+                <!-- 排除标签 -->
+                <excludes>
+                    <!--
+                        exclude可以排除指定文件，支持通配符 ,匹配项不会生成到classes目录下，路径是以directory开始的
+                      	  在这里就是directory（src/main/resources/）/multiEnv/filter-*-env.properties
+                    -->
+                    <!--  <exclude>config/common/*/*.*</exclude> -->
+                    <!-- **/*.xml 代表 directory(src/main/resources/)目录以及所有子目录的xml文件-->
+                    
+                    	<!-- <exclude>**/*.xml</exclude>
+                    	<exclude>**/*.properties</exclude>  -->
+                    
+                </excludes>
+                <!-- 包含标签 -->
+                <!-- 
+                	<includes>
+                   		 <include></include>
+               		</includes> 
+                -->
+            </resource>
+        </resources>
+        <filters>
+			<filter>${basedir}/src/main/resources/config/${env}/application.properties</filter>
+		</filters>
+	</build>
+</project>
