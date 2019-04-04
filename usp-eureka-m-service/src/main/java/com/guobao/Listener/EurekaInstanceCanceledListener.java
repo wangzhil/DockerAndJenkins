@@ -88,7 +88,7 @@ public class EurekaInstanceCanceledListener implements ApplicationListener {
 			log.info("[EurekaInstanceCanceledListener.onApplicationEvent] [服务 Aualiable442341243444。。]");
 			log.info("[EurekaInstanceCanceledListener.onApplicationEvent] [服务 Aualiable66666666。。]");
 			log.info("[EurekaInstanceCanceledListener.onApplicationEvent] [服务 Aualiable77777777。。]");
-			log.info("[EurekaInstanceCanceledListener.onApplicationEvent] [服务 Aualiable778888877。。]");
+			log.info("[EurekaInstanceCanceledListener.onApplicationEvent] [服务 Aualiable778888888。。]");
 			
 		}
 
