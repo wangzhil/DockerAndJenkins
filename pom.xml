@@ -10,6 +10,7 @@
 	<modules>
 		<module>usp-common</module>
 		<module>usp-eureka-m-service</module>
+		<module>usp-config-service</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
