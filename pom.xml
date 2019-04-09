@@ -11,6 +11,7 @@
 		<module>usp-common</module>
 		<module>usp-eureka-m-service</module>
 		<module>usp-config-service</module>
+        <module>usp-gof23-service</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
